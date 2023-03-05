@@ -1,0 +1,2 @@
+curl -H "PRIVATE-TOKEN: <access token>" "https://starfish.gitlab.yandexcloud.net/api/v4/groups/cloud/projects?per_page=100&include_subgroups=true" | jq 'map({ id: .id, name: .name, ssh_url: .ssh_url_to_repo, http_url: .http_url_to_repo })' > projects.jso
+cat projects.json | jq ".[].ssh_url" -r | xargs -I {} git clone {}
